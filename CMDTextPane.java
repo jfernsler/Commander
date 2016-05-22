@@ -14,6 +14,8 @@ public class CMDTextPane extends JTextPane
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         setBackground( panelBGColor );
         setForeground( fieldTextColor );
+        //setLineWrap(true);
+        //setWrapStyleWord(true);
         setEditable(false);
     }
     
