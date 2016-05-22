@@ -18,6 +18,8 @@ public class CLIconstruct
     double threshold;
     int motionblur;
 
+    String renderCmd = "render -r mentalray";
+    
     String inputFlag = " ";
     String outputFlag = " -im ";
     String startFlag = " -s ";
@@ -106,6 +108,7 @@ public class CLIconstruct
         minSampFlag + Integer.toString(minSamples) +
         maxSampFlag + Integer.toString(maxSamples) +
         threshFlag + Double.toString(threshold) +
+        moblurFlag + Integer.toString(motionblur) +
         endFontFormat;
     }
 
@@ -121,13 +124,24 @@ public class CLIconstruct
 
     public String getCommand()
     {
-        return "foo";
+        return renderCmd +
+        startFlag + Integer.toString(startFrame) +
+        endFlag + Integer.toString(endFrame) +
+        byFlag + Integer.toString(byFrame) +
+        xSizeFlag + Integer.toString(xSize) +
+        ySizeFlag + Integer.toString(ySize) +
+        minSampFlag + Integer.toString(minSamples) +
+        maxSampFlag + Integer.toString(maxSamples) +
+        threshFlag + Double.toString(threshold) +
+        moblurFlag + Integer.toString(motionblur) +
+        outputFlag + outputFile +
+        inputFlag + inputFile;
     }
 
     public String getFormattedCommand(String pre)
     {
         return fontFormat + cmdFormat + pre +
-        "render -r mentalray" + endFontFormat +
+        renderCmd + endFontFormat +
         getFormattedWorkers("") +
         getFormattedImageSize("") +
         getFormattedImageQuality("") +
