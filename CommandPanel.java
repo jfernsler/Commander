@@ -9,12 +9,11 @@ public class CommandPanel extends JPanel
     Color panelBorderColor = new Color(41, 41, 41);
     Color panelTitleColor = new Color( 187, 187, 187);
     Color panelBGColor = new Color(68, 68, 68);
-    
-    String toolTipString = "<html>This is the helpful tooltip, yar!<br> and another line</html>";
-    
+        
     Font cmdFont = new Font("Sans Serif", Font.PLAIN, 10);
+    JPanel helpPanel = new JPanel();
     
-    public CommandPanel( String title, int xSize, int ySize )
+    public CommandPanel( String title, int xSize, int ySize, String toolTipString )
     {
         
         setBackground(panelBGColor);
@@ -27,6 +26,7 @@ public class CommandPanel extends JPanel
         panelBorder.setTitleColor(panelTitleColor);
         
         ToolTipManager.sharedInstance().setInitialDelay(0);
+        ToolTipManager.sharedInstance().setDismissDelay(10000);
         
         setBorder(panelBorder);
         
@@ -40,8 +40,21 @@ public class CommandPanel extends JPanel
         helpButton.setOpaque(true);
         helpButton.setToolTipText(toolTipString);
 
+        helpButton.addActionListener(new ActionListener () {
+            public void actionPerformed (ActionEvent e) {
+                JOptionPane.showMessageDialog( helpPanel,
+                                           "Commander will help you build a CLI render command\n" +
+                                           "for RenderMan in Maya. Drag and Drop your Maya scene\n" +
+                                           "file on to the window and configure your render settings.\n\n" +
+                                           "Then click the Copy Command button to place the full\n" +
+                                           "command into your clipboard. From there you can open a\n" +
+                                           "Maya ready terminal and paste the command to begin rendering",
+                                              "Commander Help",
+                                           JOptionPane.PLAIN_MESSAGE );
+            }
+        });
         
-        JPanel helpPanel = new JPanel();
+        
         helpPanel.setBackground(panelBGColor);
         helpPanel.add( helpButton );
         helpPanel.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
