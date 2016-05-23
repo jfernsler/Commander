@@ -11,26 +11,26 @@ public class CLIconstruct
     int startFrame;
     int endFrame;
     int byFrame;
+    int interlaced;
     int xSize;
     int ySize;
-    int minSamples;
-    int maxSamples;
-    double threshold;
+    int shadeRate;
+    int pixSampX;
+    int pixSampY;
     int motionblur;
 
-    String renderCmd = "render -r mentalray";
+    String renderCmd = "render -r rman";
     
     String inputFlag = " ";
-    String outputFlag = " -im ";
+    String outputFlag = " -fnc name.#.ext -of OpenEXR -pad 4 -im ";
+    String outputPathFlag = " -rd ";
     String startFlag = " -s ";
     String endFlag = " -e ";
     String byFlag = " -b ";
-    String xSizeFlag = " -x ";
-    String ySizeFlag = " -y ";
-    String minSampFlag = " -minSamp ";
-    String maxSampFlag = " -maxSamp ";
-    String threshFlag = " -thresh ";
-    String moblurFlag = " -motionbur ";
+    String resFlag = " -res ";
+    String shadeRateFlag = " -setAttr ShadingRate ";
+    String pixSampFlag = " -setAttr PixelSamples \"";
+    String moblurFlag = " -motionBlur ";
 
     String fontFormat ="<font face=\"sans-serif\" size=\"2\" ";
 
@@ -46,7 +46,7 @@ public class CLIconstruct
 
 
     public CLIconstruct(String in, String out, int start, int end, int by,
-                        int x, int y, int min, int max, double thresh, int moblur )
+                        int x, int y, int shad, int pixX, int pixY, int moblur )
     {
         inputFile = in;
         outputFile = out;
@@ -55,14 +55,15 @@ public class CLIconstruct
         byFrame = by;
         xSize = x;
         ySize = y;
-        minSamples = min;
-        maxSamples = max;
-        threshold = thresh;
+        shadeRate = shad;
+        pixSampX = pixX;
+        pixSampY = pixY;
         motionblur = moblur;
+        interlaced = 0;
 
     }
     public void setAll(String in, String out, int start, int end, int by,
-                        int x, int y, int min, int max, double thresh, int moblur )
+                        int x, int y, int shad, int pixX, int pixY, int moblur )
     {
         inputFile = in;
         outputFile = out;
@@ -71,21 +72,25 @@ public class CLIconstruct
         byFrame = by;
         xSize = x;
         ySize = y;
-        minSamples = min;
-        maxSamples = max;
-        threshold = thresh;
+        shadeRate = shad;
+        pixSampX = pixX;
+        pixSampY = pixY;
         motionblur = moblur;
+        interlaced = 0;
 
     }
 
     public String getFormattedInput(String pre){
         return fontFormat + inputFormat + pre +
-        inputFlag + inputFile + endFontFormat;
+        inputFlag + inputFile +
+        endFontFormat;
     }
 
     public String getFormattedOutput(String pre){
         return fontFormat + outputFormat + pre +
-        outputFlag + outputFile + endFontFormat;
+        outputFlag + outputName +
+        outputPathFlag + outputFile +
+        endFontFormat;
     }
 
     public String getFormattedFrameCount(String pre){
@@ -97,52 +102,162 @@ public class CLIconstruct
 
     public String getFormattedImageSize(String pre){
         return fontFormat + imageSizeFormat + pre +
-        xSizeFlag + Integer.toString(xSize) +
-        ySizeFlag + Integer.toString(ySize) +
+        resFlag + Integer.toString(xSize) + " " +
+        Integer.toString(ySize) +
         endFontFormat;
 
     }
 
     public String getFormattedImageQuality(String pre){
         return fontFormat + imageQualityFormat + pre +
-        minSampFlag + Integer.toString(minSamples) +
-        maxSampFlag + Integer.toString(maxSamples) +
-        threshFlag + Double.toString(threshold) +
+        shadeRateFlag + Integer.toString(shadeRate) +
+        pixSampFlag + Integer.toString(pixSampX) + " " +
+        Integer.toString(pixSampY) + "\" " +
         moblurFlag + Integer.toString(motionblur) +
         endFontFormat;
     }
 
-    public String getFormattedWorkers(String pre){
+    public String getFormattedWorkers(String pre, int wkr, int ofWkr){
+        
+        int thisStart = startFrame;
+        int thisEnd = endFrame;
+        int frameCount = endFrame - startFrame;
+        int workerHash = wkr * ofWkr;
+        
+        if (interlaced == 0)
+        {
+            switch (workerHash) {
+                case 1:
+                    break;
+                    
+                case 2:
+                    thisStart = thisStart;
+                    thisEnd = frameCount / 2;
+                    break;
+                case 4:
+                    thisStart = frameCount / 2 + 1;
+                    thisEnd = thisEnd;
+                    break;
+                case 3:
+                    thisStart = thisStart;
+                    thisEnd = frameCount / 3;
+                    break;
+                case 6:
+                    thisStart = frameCount / 3 + 1;
+                    thisEnd = thisEnd - frameCount / 3;
+                    break;
+                case 9:
+                    thisStart = thisEnd - frameCount / 3 + 1;
+                    thisEnd = thisEnd;
+                    break;
+            }
+        } else {
+            switch (workerHash) {
+                case 1:
+                    break;
+                    
+                case 2:
+                    break;
+                case 4:
+                    thisStart += 1;
+                    break;
+                case 3:
+                    break;
+                case 6:
+                    thisStart += 1;
+                    break;
+                case 9:
+                    thisStart += 2;
+                    break;
+            }
+        }
+        
         return fontFormat + workerFormat + pre + endFontFormat +
         fontFormat + frameCountFormat +
-        startFlag + Integer.toString(startFrame) +
-        endFlag + Integer.toString(endFrame) + endFontFormat +
+        startFlag + Integer.toString(thisStart) +
+        endFlag + Integer.toString(thisEnd) + endFontFormat +
         fontFormat + workerFormat +
         byFlag + Integer.toString(byFrame) +
         endFontFormat;
     }
 
-    public String getCommand()
+    public String getCommand(int wkr, int ofWkr)
     {
+        
+        
+        int thisStart = startFrame;
+        int thisEnd = endFrame;
+        int frameCount = thisEnd - thisStart;
+        int workerHash = wkr * ofWkr;
+        
+        if (interlaced == 0)
+        {
+            switch (workerHash) {
+                case 1:
+                    break;
+                    
+                case 2:
+                    thisStart = thisStart;
+                    thisEnd = frameCount / 2;
+                    break;
+                case 4:
+                    thisStart = frameCount / 2 + 1;
+                    thisEnd = thisEnd;
+                    break;
+                case 3:
+                    thisStart = thisStart;
+                    thisEnd = frameCount / 3;
+                    break;
+                case 6:
+                    thisStart = frameCount / 3 + 1;
+                    thisEnd = thisEnd - frameCount / 3;
+                    break;
+                case 9:
+                    thisStart = thisEnd - frameCount / 3 + 1;
+                    thisEnd = thisEnd;
+                    break;
+            }
+        } else {
+            switch (workerHash) {
+                case 1:
+                    break;
+                    
+                case 2:
+                    break;
+                case 4:
+                    thisStart += 1;
+                    break;
+                case 3:
+                    break;
+                case 6:
+                    thisStart += 1;
+                    break;
+                case 9:
+                    thisStart += 2;
+                    break;
+            }
+        }
+        
         return renderCmd +
-        startFlag + Integer.toString(startFrame) +
-        endFlag + Integer.toString(endFrame) +
+        startFlag + Integer.toString(thisStart) +
+        endFlag + Integer.toString(thisEnd) +
         byFlag + Integer.toString(byFrame) +
-        xSizeFlag + Integer.toString(xSize) +
-        ySizeFlag + Integer.toString(ySize) +
-        minSampFlag + Integer.toString(minSamples) +
-        maxSampFlag + Integer.toString(maxSamples) +
-        threshFlag + Double.toString(threshold) +
+        resFlag + Integer.toString(xSize) + " " +
+        Integer.toString(ySize) +
+        shadeRateFlag + Integer.toString(shadeRate) +
+        pixSampFlag + Integer.toString(pixSampX) + " " +
+        Integer.toString(pixSampY) + "\" " +
         moblurFlag + Integer.toString(motionblur) +
-        outputFlag + outputFile +
+        outputFlag + outputName +
+        outputPathFlag + outputFile +
         inputFlag + inputFile;
     }
 
-    public String getFormattedCommand(String pre)
+    public String getFormattedCommand(String pre, int wkr, int ofWkr)
     {
         return fontFormat + cmdFormat + pre +
         renderCmd + endFontFormat +
-        getFormattedWorkers("") +
+        getFormattedWorkers("", wkr, ofWkr) +
         getFormattedImageSize("") +
         getFormattedImageQuality("") +
         getFormattedOutput("") +
@@ -177,8 +292,9 @@ public class CLIconstruct
         return endFrame;
     }
 
-    public void setByFrame(int x){
+    public void setByFrame(int x, int y){
         byFrame = x;
+        interlaced = y;
     }
 
     public int getByFrame(){
@@ -201,28 +317,28 @@ public class CLIconstruct
         return ySize;
     }
 
-    public void setMinSamples(int x){
-        minSamples = x;
+    public void setshadeRate(int x){
+        shadeRate = x;
     }
 
-    public int getMinSamples(){
-        return minSamples;
+    public int getshadeRate(){
+        return shadeRate;
     }
 
-    public void setMaxSamples(int x){
-        maxSamples = x;
+    public void setPixSampX(int x){
+        pixSampX = x;
     }
 
-    public int getMaxSamples(){
-        return maxSamples;
+    public int getPixSampX(){
+        return pixSampX;
     }
 
-    public void setThreshold(double x){
-        threshold = x;
+    public void setPixSampY(int x){
+        pixSampY = x;
     }
 
-    public double getThreshold(){
-        return threshold;
+    public int getPixSampY(){
+        return pixSampY;
     }
 
     public void setMotionblur(int x){
@@ -252,14 +368,19 @@ public class CLIconstruct
     {
       return outputName;
     }
+    
+    public String getFullName()
+    {
+        return outputName + ".#.exr";
+    }
 
-    public void setPreset(int x, int y, int min, int max, double thresh, int moblur )
+    public void setPreset(int x, int y, int shad, int pixX, int pixY, int moblur )
     {
       xSize = x;
       ySize = y;
-      minSamples = min;
-      maxSamples = max;
-      threshold = thresh;
+      shadeRate = shad;
+      pixSampX = pixX;
+      pixSampY = pixY;
       motionblur = moblur;
     }
 
