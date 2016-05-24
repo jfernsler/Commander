@@ -11,16 +11,6 @@ public class HelpStrings
     {
 
     }
-
-    
-    String inputFormat = "color=\"BFB23A\">";
-    String outputFormat = "color=\"2CB325\">";
-    String frameCountFormat = "color=\"DB9496\">";
-    String imageSizeFormat = "color=\"AC9BD6\">";
-    String imageQualityFormat = "color=\"C57867\">";
-    String workerFormat = "color=\"528586\">";
-    String cmdFormat = "color=\"E1E1E1\">";
-    
     
     public String getIOHelpString()
     {
