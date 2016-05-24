@@ -30,7 +30,7 @@ public class CLIconstruct
     String resFlag = " -res ";
     String shadeRateFlag = " -setAttr ShadingRate ";
     String pixSampFlag = " -setAttr PixelSamples \"";
-    String moblurFlag = " -motionBlur ";
+    String moblurFlag = " -setAttr motionBlur ";
 
     String fontFormat ="<font face=\"sans-serif\" size=\"2\" ";
 

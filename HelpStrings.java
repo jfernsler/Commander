@@ -83,7 +83,7 @@ public class HelpStrings
         "- a value of 1 in both X and Y will<br>" +
         "essentially turn of anti-alising, higher numbers produce smoother <br>" +
         "images edges and textures.</li>" +
-        "<li><font color=\"C57867\"><b>-motionBlur <i>1 or 0</i></b></font> " +
+        "<li><font color=\"C57867\"><b>-setAttr motionBlur <i>1 or 0</i></b></font> " +
         "- activates or deactivates motion blur.</li>" +
         endFormat;
     }
