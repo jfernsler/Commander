@@ -2,8 +2,8 @@ import java.util.*;
 
 public class CLIconstruct
 {
-
-
+    
+    
     String inputFile;
     String outputFile;
     String inputName;
@@ -18,7 +18,7 @@ public class CLIconstruct
     int pixSampX;
     int pixSampY;
     int motionblur;
-
+    
     String renderCmd = "render -r rman";
     
     String inputFlag = " ";
@@ -31,9 +31,9 @@ public class CLIconstruct
     String shadeRateFlag = " -setAttr ShadingRate ";
     String pixSampFlag = " -setAttr PixelSamples \"";
     String moblurFlag = " -setAttr motionBlur ";
-
+    
     String fontFormat ="<font face=\"sans-serif\" size=\"2\" ";
-
+    
     String inputFormat = "color=\"BFB23A\">";
     String outputFormat = "color=\"2CB325\">";
     String frameCountFormat = "color=\"DB9496\">";
@@ -41,10 +41,10 @@ public class CLIconstruct
     String imageQualityFormat = "color=\"C57867\">";
     String workerFormat = "color=\"528586\">";
     String cmdFormat = "color=\"E1E1E1\">";
-
+    
     String endFontFormat = "</font>";
-
-
+    
+    
     public CLIconstruct(String in, String out, int start, int end, int by,
                         int x, int y, int shad, int pixX, int pixY, int moblur )
     {
@@ -60,10 +60,10 @@ public class CLIconstruct
         pixSampY = pixY;
         motionblur = moblur;
         interlaced = 0;
-
+        
     }
     public void setAll(String in, String out, int start, int end, int by,
-                        int x, int y, int shad, int pixX, int pixY, int moblur )
+                       int x, int y, int shad, int pixX, int pixY, int moblur )
     {
         inputFile = in;
         outputFile = out;
@@ -77,37 +77,37 @@ public class CLIconstruct
         pixSampY = pixY;
         motionblur = moblur;
         interlaced = 0;
-
+        
     }
-
+    
     public String getFormattedInput(String pre){
         return fontFormat + inputFormat + pre +
         inputFlag + inputFile +
         endFontFormat;
     }
-
+    
     public String getFormattedOutput(String pre){
         return fontFormat + outputFormat + pre +
         outputFlag + outputName +
         outputPathFlag + outputFile +
         endFontFormat;
     }
-
+    
     public String getFormattedFrameCount(String pre){
         return fontFormat + frameCountFormat + pre +
         startFlag + Integer.toString(startFrame) +
         endFlag + Integer.toString(endFrame) +
         endFontFormat;
     }
-
+    
     public String getFormattedImageSize(String pre){
         return fontFormat + imageSizeFormat + pre +
         resFlag + Integer.toString(xSize) + " " +
         Integer.toString(ySize) +
         endFontFormat;
-
+        
     }
-
+    
     public String getFormattedImageQuality(String pre){
         return fontFormat + imageQualityFormat + pre +
         shadeRateFlag + Integer.toString(shadeRate) +
@@ -116,7 +116,7 @@ public class CLIconstruct
         moblurFlag + Integer.toString(motionblur) +
         endFontFormat;
     }
-
+    
     public String getFormattedWorkers(String pre, int wkr, int ofWkr){
         
         int thisStart = startFrame;
@@ -180,7 +180,7 @@ public class CLIconstruct
         byFlag + Integer.toString(byFrame) +
         endFontFormat;
     }
-
+    
     public String getCommand(int wkr, int ofWkr)
     {
         
@@ -252,7 +252,7 @@ public class CLIconstruct
         outputPathFlag + outputFile +
         inputFlag + inputFile;
     }
-
+    
     public String getFormattedCommand(String pre, int wkr, int ofWkr)
     {
         return fontFormat + cmdFormat + pre +
@@ -263,125 +263,125 @@ public class CLIconstruct
         getFormattedOutput("") +
         getFormattedInput("");
     }
-
+    
     public void setInput(String str){
         inputFile = str;
     }
-
+    
     public String getInputFile(){
         return "foobar.ma";
     }
-
+    
     public void setOutput(String str){
         outputFile = str;
     }
-
+    
     public void setStartFrame(int x){
         startFrame = x;
     }
-
+    
     public int getStartFrame(){
         return startFrame;
     }
-
+    
     public void setEndFrame(int x){
         endFrame = x;
     }
-
+    
     public int getEndFrame(){
         return endFrame;
     }
-
+    
     public void setByFrame(int x, int y){
         byFrame = x;
         interlaced = y;
     }
-
+    
     public int getByFrame(){
         return byFrame;
     }
-
+    
     public void setXSize(int x){
         xSize = x;
     }
-
+    
     public int getXSize(){
         return xSize;
     }
-
+    
     public void setYSize(int x){
         ySize = x;
     }
-
+    
     public int getYSize(){
         return ySize;
     }
-
+    
     public void setshadeRate(int x){
         shadeRate = x;
     }
-
+    
     public int getshadeRate(){
         return shadeRate;
     }
-
+    
     public void setPixSampX(int x){
         pixSampX = x;
     }
-
+    
     public int getPixSampX(){
         return pixSampX;
     }
-
+    
     public void setPixSampY(int x){
         pixSampY = x;
     }
-
+    
     public int getPixSampY(){
         return pixSampY;
     }
-
+    
     public void setMotionblur(int x){
         motionblur = x;
     }
-
+    
     public int getMotionblur(){
         return motionblur;
     }
-
+    
     public void setInputName(String n)
     {
-      inputName = n;
+        inputName = n;
     }
-
+    
     public String getInputName()
     {
-      return inputName;
+        return inputName;
     }
-
+    
     public void setOutputName(String n)
     {
-      outputName = n;
+        outputName = n;
     }
-
+    
     public String getOutputName()
     {
-      return outputName;
+        return outputName;
     }
     
     public String getFullName()
     {
         return outputName + ".#.exr";
     }
-
+    
     public void setPreset(int x, int y, int shad, int pixX, int pixY, int moblur )
     {
-      xSize = x;
-      ySize = y;
-      shadeRate = shad;
-      pixSampX = pixX;
-      pixSampY = pixY;
-      motionblur = moblur;
+        xSize = x;
+        ySize = y;
+        shadeRate = shad;
+        pixSampX = pixX;
+        pixSampY = pixY;
+        motionblur = moblur;
     }
-
+    
 }

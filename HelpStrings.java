@@ -2,14 +2,14 @@
 
 public class HelpStrings
 {
-
+    
     String startFormat ="<html><body bgcolor=\"444444\"><br>"+
-                        "<font face=\"sans-serif\" size=\"2\" color=\"E1E1E1\">";
+    "<font face=\"sans-serif\" size=\"2\" color=\"E1E1E1\">";
     String endFormat = "</font><br></body></html>";
-
+    
     public HelpStrings()
     {
-
+        
     }
     
     public String getIOHelpString()
@@ -27,7 +27,7 @@ public class HelpStrings
         "this is the path where the files will land.</li></ul>" +
         endFormat;
     }
-
+    
     public String getFCHelpString()
     {
         return startFormat +
@@ -107,5 +107,5 @@ public class HelpStrings
         "interlaces the entire sequence across multiple machines.</li></ul></li>" +
         endFormat;
     }
-
+    
 }
