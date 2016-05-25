@@ -1,8 +1,20 @@
+/*
+ * Jeremy Fernsler
+ * jf575@drexel.edu
+ * CS530:DUI, Term Project
+ *
+ */
+
 import java.util.*;
 
+
+// This is the base data structure for Commander
+// Stores the base command, command flags, flag values,
+//  input and output file paths and names.
+// This also stores HTML formatting information such as colors
+//  and font types and sizes for returning a formatted command
 public class CLIconstruct
 {
-    
     
     String inputFile;
     String outputFile;
@@ -19,8 +31,10 @@ public class CLIconstruct
     int pixSampY;
     int motionblur;
     
+    // base command string
     String renderCmd = "render -r rman";
     
+    // command flags
     String inputFlag = " ";
     String outputFlag = " -fnc name.#.ext -of OpenEXR -pad 4 -im ";
     String outputPathFlag = " -rd ";
@@ -32,6 +46,7 @@ public class CLIconstruct
     String pixSampFlag = " -setAttr PixelSamples \"";
     String moblurFlag = " -setAttr motionBlur ";
     
+    // font formatting strings and colors
     String fontFormat ="<font face=\"sans-serif\" size=\"2\" ";
     
     String inputFormat = "color=\"BFB23A\">";
@@ -44,7 +59,7 @@ public class CLIconstruct
     
     String endFontFormat = "</font>";
     
-    
+    // constructor
     public CLIconstruct(String in, String out, int start, int end, int by,
                         int x, int y, int shad, int pixX, int pixY, int moblur )
     {
@@ -62,6 +77,8 @@ public class CLIconstruct
         interlaced = 0;
         
     }
+    
+    // method for setting all values
     public void setAll(String in, String out, int start, int end, int by,
                        int x, int y, int shad, int pixX, int pixY, int moblur )
     {
@@ -80,12 +97,16 @@ public class CLIconstruct
         
     }
     
+    // returns HTML formatted string for input, takes a prefix string
+    // for an argument
     public String getFormattedInput(String pre){
         return fontFormat + inputFormat + pre +
         inputFlag + inputFile +
         endFontFormat;
     }
     
+    // returns HTML formatted string for output, takes a prefix string
+    // for an argument
     public String getFormattedOutput(String pre){
         return fontFormat + outputFormat + pre +
         outputFlag + outputName +
@@ -93,6 +114,8 @@ public class CLIconstruct
         endFontFormat;
     }
     
+    // returns HTML formatted string for frame count, takes a prefix string
+    // for an argument
     public String getFormattedFrameCount(String pre){
         return fontFormat + frameCountFormat + pre +
         startFlag + Integer.toString(startFrame) +
@@ -100,6 +123,8 @@ public class CLIconstruct
         endFontFormat;
     }
     
+    // returns HTML formatted string for image size, takes a prefix string
+    // for an argument
     public String getFormattedImageSize(String pre){
         return fontFormat + imageSizeFormat + pre +
         resFlag + Integer.toString(xSize) + " " +
@@ -108,6 +133,8 @@ public class CLIconstruct
         
     }
     
+    // returns HTML formatted string for overrides, takes a prefix string
+    // for an argument
     public String getFormattedImageQuality(String pre){
         return fontFormat + imageQualityFormat + pre +
         shadeRateFlag + Integer.toString(shadeRate) +
@@ -117,6 +144,9 @@ public class CLIconstruct
         endFontFormat;
     }
     
+    // returns HTML formatted string for worker setup, takes a prefix string,
+    // and which worker and how many workers their are.
+    // - if it's worker 2 or 3 then the command string is different and 1 or 3
     public String getFormattedWorkers(String pre, int wkr, int ofWkr){
         
         int thisStart = startFrame;
@@ -124,6 +154,7 @@ public class CLIconstruct
         int frameCount = endFrame - startFrame;
         int workerHash = wkr * ofWkr;
         
+        // check the method sharing work and set frame counts appropriately
         if (interlaced == 0)
         {
             switch (workerHash) {
@@ -181,6 +212,9 @@ public class CLIconstruct
         endFontFormat;
     }
     
+    // returns the full, unformatted command string to be placed
+    // in the clipboard. Takes the work and ofWorkers as arguments
+    // reconstructs the full command in the return statement
     public String getCommand(int wkr, int ofWkr)
     {
         
@@ -253,6 +287,9 @@ public class CLIconstruct
         inputFlag + inputFile;
     }
     
+    // returns the full formatted command for display - leverages
+    // all formatted command methods above - takes a prefix string
+    // and worker / ofworker values.
     public String getFormattedCommand(String pre, int wkr, int ofWkr)
     {
         return fontFormat + cmdFormat + pre +
@@ -264,116 +301,134 @@ public class CLIconstruct
         getFormattedInput("");
     }
     
+    // Getters and Setters follow
+    // set input
     public void setInput(String str){
         inputFile = str;
     }
-    
+    //get input file name
     public String getInputFile(){
         return "foobar.ma";
     }
     
+    // set output
     public void setOutput(String str){
         outputFile = str;
     }
     
+    // set start frame
     public void setStartFrame(int x){
         startFrame = x;
     }
-    
+    // get start frame
     public int getStartFrame(){
         return startFrame;
     }
     
+    // set end frame
     public void setEndFrame(int x){
         endFrame = x;
     }
-    
+    // get end frame
     public int getEndFrame(){
         return endFrame;
     }
     
+    // set by frame
     public void setByFrame(int x, int y){
         byFrame = x;
         interlaced = y;
     }
-    
+    // get by frame
     public int getByFrame(){
         return byFrame;
     }
     
+    // set output x dimension
     public void setXSize(int x){
         xSize = x;
     }
-    
+    // get output x dimension
     public int getXSize(){
         return xSize;
     }
     
+    // set output y dimension
     public void setYSize(int x){
         ySize = x;
     }
-    
+    // get output y dimension
     public int getYSize(){
         return ySize;
     }
     
+    // shet shading rate
     public void setshadeRate(int x){
         shadeRate = x;
     }
-    
+    // get shading rate
     public int getshadeRate(){
         return shadeRate;
     }
     
+    // set x pixel sample rate
     public void setPixSampX(int x){
         pixSampX = x;
     }
-    
+    // get x pixel sample rate
     public int getPixSampX(){
         return pixSampX;
     }
     
+    // set y pixel sample rate
     public void setPixSampY(int x){
         pixSampY = x;
     }
-    
+    // get y pixel sample rate
     public int getPixSampY(){
         return pixSampY;
     }
     
+    // set motion blur value
     public void setMotionblur(int x){
         motionblur = x;
     }
-    
+    // get motion blur value
     public int getMotionblur(){
         return motionblur;
     }
     
+    // set input file name
     public void setInputName(String n)
     {
         inputName = n;
     }
-    
+    // get input file name
     public String getInputName()
     {
         return inputName;
     }
     
+    // set output file name
     public void setOutputName(String n)
     {
         outputName = n;
     }
     
+    // get output file name
     public String getOutputName()
     {
         return outputName;
     }
     
+    
+    // get the full output file name and extension
     public String getFullName()
     {
         return outputName + ".#.exr";
     }
     
+    // set all values pertinent to a preset
     public void setPreset(int x, int y, int shad, int pixX, int pixY, int moblur )
     {
         xSize = x;
