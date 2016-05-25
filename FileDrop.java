@@ -1,3 +1,13 @@
+/*
+ * Jeremy Fernsler
+ * jf575@drexel.edu
+ * CS530:DUI, Term Project
+ *
+ */
+
+// Full credit for this class goes to Robert Harder who put it into
+// public domain - I have changed nothing, it's a great way to add
+// DnD to any JComponent.
 
 import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedReader;

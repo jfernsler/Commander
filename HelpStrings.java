@@ -1,27 +1,30 @@
+/*
+ * Jeremy Fernsler
+ * jf575@drexel.edu
+ * CS530:DUI, Term Project
+ *
+ */
 
 
+// HelpStrings is a class which contains all of the strings for
+// the tooltip help buttons on the UI.
 public class HelpStrings
 {
 
+    // html formatting tags to create the dark bg, san-sarif fonts and the
+    // proper font size. The color #E1E1E1 is used for all non-argument
+    // based text. Nested font definitions bring additional colors
     String startFormat ="<html><body bgcolor=\"444444\"><br>"+
                         "<font face=\"sans-serif\" size=\"2\" color=\"E1E1E1\">";
     String endFormat = "</font><br></body></html>";
 
+    // Empty constructor
     public HelpStrings()
     {
-
+        // intentionally empty.
     }
-
     
-    String inputFormat = "color=\"BFB23A\">";
-    String outputFormat = "color=\"2CB325\">";
-    String frameCountFormat = "color=\"DB9496\">";
-    String imageSizeFormat = "color=\"AC9BD6\">";
-    String imageQualityFormat = "color=\"C57867\">";
-    String workerFormat = "color=\"528586\">";
-    String cmdFormat = "color=\"E1E1E1\">";
-    
-    
+    // returns the help string for the input and output section
     public String getIOHelpString()
     {
         return startFormat +
@@ -38,6 +41,7 @@ public class HelpStrings
         endFormat;
     }
 
+    // returns the help string for the frame count section
     public String getFCHelpString()
     {
         return startFormat +
@@ -49,6 +53,7 @@ public class HelpStrings
         endFormat;
     }
     
+    // returns the help string for the presets section
     public String getPresetsHelpString()
     {
         return startFormat +
@@ -65,6 +70,7 @@ public class HelpStrings
         endFormat;
     }
     
+    // returns the help string for the image size section
     public String getISHelpString()
     {
         return startFormat +
@@ -80,6 +86,7 @@ public class HelpStrings
         endFormat;
     }
     
+    // returns the help string for the override quality section
     public String getOQHelpString()
     {
         return startFormat +
@@ -98,6 +105,8 @@ public class HelpStrings
         endFormat;
     }
     
+    // returns the help string for the worker section - this one is important
+    // as it needs to further re-enforce the concept of what is happening
     public String getWKHelpString()
     {
         return startFormat +
