@@ -77,7 +77,9 @@ public class CommandPanel extends JPanel
                                               "render settings.\n\n" +
                                               "Finally, click the Copy Command button to place the full\n" +
                                               "command into your clipboard. From there you can open a\n" +
-                                              "Maya ready terminal and paste the command to begin rendering",
+                                              "Maya ready terminal and paste the command to begin rendering\n\n" +
+                                              "For additional information about the commands used, type:\n" +
+                                              "\"render -help\" in a Maya command line.",
                                               "Commander Help",
                                               JOptionPane.PLAIN_MESSAGE );
             }

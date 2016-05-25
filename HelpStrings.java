@@ -15,7 +15,7 @@ public class HelpStrings
     // proper font size. The color #E1E1E1 is used for all non-argument
     // based text. Nested font definitions bring additional colors
     String startFormat ="<html><body bgcolor=\"444444\"><br>"+
-                        "<font face=\"sans-serif\" size=\"2\" color=\"E1E1E1\">";
+    "<font face=\"sans-serif\" size=\"2\" color=\"E1E1E1\">";
     String endFormat = "</font><br></body></html>";
 
     // Empty constructor
@@ -100,7 +100,7 @@ public class HelpStrings
         "- a value of 1 in both X and Y will<br>" +
         "essentially turn of anti-alising, higher numbers produce smoother <br>" +
         "images edges and textures.</li>" +
-        "<li><font color=\"C57867\"><b>-motionBlur <i>1 or 0</i></b></font> " +
+        "<li><font color=\"C57867\"><b>-setAttr motionBlur <i>1 or 0</i></b></font> " +
         "- activates or deactivates motion blur.</li>" +
         endFormat;
     }
@@ -126,5 +126,5 @@ public class HelpStrings
         "interlaces the entire sequence across multiple machines.</li></ul></li>" +
         endFormat;
     }
-
+    
 }
