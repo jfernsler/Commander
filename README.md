@@ -5,7 +5,7 @@ A Visual Constructor for CLI Render Commands
 
 This application was developed with Java 8 and has been tested on Mac OS X 10.11.4 and 10.9 successfully.
 
-Clone the repository and navigate to the directory in your Terminal app and enter:  `javac *.java` to compile all of the Java code to bytecode. Then enter: `java Commander` to launch the application.  
+Clone the repository and navigate to the Commander src directory in your Terminal app and enter:  `javac *.java` to compile all of the Java code to bytecode. Then enter: `java Commander` to launch the application.  
 
 Follow the prompts in the resulting window to begin and use the help icons on the left of the window to aid in your process if need be.
 
