@@ -1006,7 +1006,7 @@ public class Commander
         isDisplay.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         
         isContentPanel.add(isRadioPanel);
-        isContentPanel.add(Box.createRigidArea (new Dimension (30,1)));
+        isContentPanel.add(Box.createRigidArea (new Dimension (45,1)));
         isContentPanel.add(isDisplay);
         
         is_panel.add( isContentPanel, BorderLayout.LINE_START );
