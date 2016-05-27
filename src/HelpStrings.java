@@ -36,7 +36,7 @@ public class HelpStrings
         "<li><font color=\"2CB325\"><b>-pad <i>number padding</i></b></font> " +
         "how many digits the file numbering uses.</li>" +
         "<li><font color=\"2CB325\"><b>-im <i>image name</i></b></font> the name to be used." +
-        "<li><font color=\"2CB325\"></b>-rd <i>render directory</i></b></font> " +
+        "<li><font color=\"2CB325\"><b>-rd <i>render directory</i></b></font> " +
         "this is the path where the files will land.</li></ul>" +
         endFormat;
     }
