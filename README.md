@@ -1,3 +1,4 @@
+![Commander Icon](src/images/commander_icon_sm.png)
 ###Commander
 A Visual Constructor for CLI Render Commands
 
