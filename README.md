@@ -11,3 +11,6 @@ Clone the repository and navigate to the Commander src directory in your Termina
 Follow the prompts in the resulting window to begin and use the help icons on the left of the window to aid in your process if need be.
 
 Enjoy!
+
+Note:  
+The drag and drop aspect is using the [FileDrop class from Nathan Blomquist](http://iharder.sourceforge.net/current/java/filedrop/). His class is released into public domain for use. It enables drag and drop for any JComponent and makes it exceptionally straightforward to implement.
