@@ -10,6 +10,8 @@ Clone the repository and navigate to the Commander src directory in your Termina
 
 Follow the prompts in the resulting window to begin and use the help icons on the left of the window to aid in your process if need be.
 
+[Watch a short trailer for *Commander* on YouTube](https://youtu.be/Xjfo6h4WUUc)
+
 Enjoy!
 
 Note:  
