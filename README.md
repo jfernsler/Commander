@@ -1,5 +1,5 @@
 ![Commander Icon](src/images/commander_icon_sm.png)
-###Commander
+### Commander
 A Visual Constructor for CLI Render Commands
 
 *Commander* is a Java application designed to help Maya users construct a CLI render command for the Renderman rendering engine. For anyone who may be apprehensive about using a terminal prompt to render their images or animations, *Commander* provides a logical UI and a set of presets to help you create a command that suites your needs. For users who are comfortable with the CLI, *Commander* can provide a fast and accurate way to generate commands without the need to enter all of the necessary flags and arguments. This application also provides a simple way to create a set of render commands which allow you to distribute your rendering across multiple computers. 
